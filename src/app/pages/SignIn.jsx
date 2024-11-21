@@ -13,6 +13,9 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../features/slices/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -58,14 +61,18 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export default function SignIn() {
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
 
   const handleSubmit = (event) => {
+    event.preventDefault();
     if (emailError || passwordError) {
-      event.preventDefault();
       return;
     }
     const data = new FormData(event.currentTarget);
@@ -73,6 +80,14 @@ export default function SignIn() {
       email: data.get('email'),
       password: data.get('password'),
     });
+
+    const userData = {
+      email: data.get('email'),
+      password: data.get('password')
+    }
+
+    dispatch(setUser(userData))
+    navigate("/")
   };
 
   const validateInputs = () => {
