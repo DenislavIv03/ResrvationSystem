@@ -1,12 +1,29 @@
 import { Box } from '@mui/material'
 import { useState } from 'react'
+import { Route, Routes } from 'react-router-dom'
+import SignIn from './app/pages/SignIn'
+import ProtectedRoute from './app/components/common/ProtectedRoute'
+import { logout } from './features/slices/authSlice'
+import { useDispatch } from 'react-redux'
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const dispatch = useDispatch()
 
   return (
     <>
-       <Box sx={{  marginRight: "10px"}}>Reservation System</Box>
+      <Routes>
+        <Route path="/*" element={
+          <ProtectedRoute>
+            <Box sx={{  marginRight: "10px"}}>Reservation System</Box>
+            <div>I am logged in!</div>
+            <button onClick={() => dispatch(logout())}>Logout</button>
+          </ProtectedRoute>
+        }/>
+        <Route path='/sign-in' element={<SignIn />}/>
+      </Routes>
+       
+
     </>
   )
 }
