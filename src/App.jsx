@@ -1,3 +1,4 @@
+import { Box } from '@mui/material'
 import { useState } from 'react'
 
 function App() {
@@ -5,7 +6,7 @@ function App() {
 
   return (
     <>
-       <h1>Reservation System</h1>
+       <Box sx={{  marginRight: "10px"}}>Reservation System</Box>
     </>
   )
 }
