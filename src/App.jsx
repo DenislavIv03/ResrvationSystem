@@ -5,6 +5,7 @@ import SignIn from './app/pages/SignIn'
 import ProtectedRoute from './app/components/common/ProtectedRoute'
 import { logout } from './features/slices/authSlice'
 import { useDispatch } from 'react-redux'
+import BookCalendar from './app/components/BookCalendar'
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Box sx={{  marginRight: "10px"}}>Reservation System</Box>
             <div>I am logged in!</div>
             <button onClick={() => dispatch(logout())}>Logout</button>
+            <BookCalendar/>
           </ProtectedRoute>
         }/>
         <Route path='/sign-in' element={<SignIn />}/>
