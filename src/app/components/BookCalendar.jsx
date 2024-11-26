@@ -48,7 +48,18 @@ function BookCalendar() {
   
   return (
     <>
-        <Button onClick={handleOpen}>Open Modal</Button>
+        <Button
+         sx={{
+          border:"3px solid green",
+          color: "green",
+          display: "inline-block",
+          textTransform: "unset",
+          py: 0.5,
+          px: 1.2,
+         }}
+         onClick={handleOpen}
+         >Book
+         </Button>
 
         <Modal
          sx={{
