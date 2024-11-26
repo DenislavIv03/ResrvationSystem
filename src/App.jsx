@@ -7,6 +7,7 @@ import { logout } from './features/slices/authSlice'
 import { useDispatch } from 'react-redux'
 import MyProfile from './app/pages/ProfilePage'
 import SignUp from './app/pages/Register'
+import BookCalendar from './app/components/BookCalendar'
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
             <Box sx={{  marginRight: "10px"}}>Reservation System</Box>
             <div>I am logged in!</div>
             <button onClick={() => dispatch(logout())}>Logout</button>
+            <BookCalendar />
             <Routes>
             <Route path="profile" element={<MyProfile/>} />
             </Routes>

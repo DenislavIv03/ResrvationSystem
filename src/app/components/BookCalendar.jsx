@@ -63,7 +63,7 @@ function BookCalendar() {
 
         <Modal
          sx={{
-            width: 700,
+            width: 400,
             maxWidth: 'calc(100% - 2.5rem)',
             marginInline: 'auto',
             marginBlock: 2,
@@ -93,7 +93,22 @@ function BookCalendar() {
                             onError={handleError}
                         />
                     </LocalizationProvider>
-                    <Button onClick={handleSaveChanges}>Save Changes</Button>
+                    <Box>
+                      <Button
+                        sx={{
+                          border:"3px solid lightblue",
+                          color: "navyblue",
+                          display: "inline-block",
+                          textTransform: "unset",
+                          py: 0.5,
+                          px: 1.2,
+                          mt: 1.5
+                        }}
+                        onClick={handleSaveChanges}
+                        >Save Changes
+                      </Button>
+                    </Box>
+                    
                 </Box>
             </Fade>
         </Modal>
