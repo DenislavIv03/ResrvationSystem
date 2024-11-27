@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux'
 import MyProfile from './app/pages/ProfilePage'
 import SignUp from './app/pages/Register'
 import BookCalendar from './app/components/BookCalendar'
+import ReservationSearch from './app/components/common/ReservationSearch'
 
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
             <div>I am logged in!</div>
             <button onClick={() => dispatch(logout())}>Logout</button>
             <BookCalendar />
-            
+            <ReservationSearch />
             <Routes>
             <Route path="profile" element={<MyProfile/>} />
             </Routes>
