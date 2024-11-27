@@ -9,6 +9,8 @@ import MyProfile from './app/pages/ProfilePage'
 import SignUp from './app/pages/Register'
 import BookCalendar from './app/components/BookCalendar'
 import ReservationSearch from './app/components/common/ReservationSearch'
+import DummyHotelSearch from './app/components/DummyHotelSearch'
+import UserReservations from './app/components/UserReservations'
 
 
 function App() {
@@ -22,17 +24,17 @@ function App() {
             <Box sx={{  marginRight: "10px"}}>Reservation System</Box>
             <div>I am logged in!</div>
             <button onClick={() => dispatch(logout())}>Logout</button>
-            <BookCalendar />
-            <ReservationSearch />
+            
             <Routes>
-            <Route path="profile" element={<MyProfile/>} />
+              <Route index element={<h1>Home</h1>}/>
+              <Route path="profile" element={<MyProfile/>} />
+              <Route path="register" element={<SignUp/>} />
+              <Route path="my-reservations" element={<UserReservations />}/>
             </Routes>
-            <Routes>
-            <Route path="register" element={<SignUp/>} />
-            </Routes>
+
           </ProtectedRoute>
         }/>
-        <Route path='/sign-in' element={<SignIn />}/>
+        <Route path='sign-in' element={<SignIn />}/>
       </Routes>
        
 

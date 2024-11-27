@@ -1,11 +1,11 @@
 import { DataGrid } from "@mui/x-data-grid"
 import { useSelector } from "react-redux"
 import { selectCalendarDates } from "../../features/slices/bookCalendarSlice"
+import DummyHotelSearch from "./DummyHotelSearch"
 
 function UserReservations() {
 
   const rows = useSelector(selectCalendarDates)
-  console.log(rows)
   
   const columns = [
     {field: 'hotelName', headerName: 'Name', width: 200},
@@ -16,6 +16,8 @@ function UserReservations() {
   return (
     <>
         <h1>My Reservations</h1>
+
+        <DummyHotelSearch />
 
         <DataGrid
             rows={rows}
