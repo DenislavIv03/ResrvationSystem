@@ -5,11 +5,20 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { reserveDate, selectCalendarDates } from "../../features/slices/bookCalendarSlice"
 import dayjs from "dayjs"
+import { selectHotels } from "../../features/slices/hotelSlice"
 
-function BookCalendar() {
+function BookCalendar({for: serviceId}) {
   
   const dispatch = useDispatch();
+
+  const currentHotel = useSelector(selectHotels)
+                       .find(hotel => hotel.id == serviceId)
+
   const reservedDates = useSelector(selectCalendarDates)
+                        .filter(resDate => resDate.hotelId == currentHotel.id)
+
+  console.log(currentHotel)
+  console.log(reservedDates)
 
   const [open, setOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -20,11 +29,11 @@ function BookCalendar() {
   const handlePickerChange = (newDate) => setSelectedDate(newDate);
   const handleError = (newError) => setError(newError);
 
-  const shouldDisableDates = (dateForDisable) => {
-    return reservedDates.some(date =>
-         dateForDisable.isSame(dayjs(date),'day')
-    )
-  }
+  // const shouldDisableDates = (dateForDisable) => {
+  //   return reservedDates.some(date =>
+  //        dateForDisable.isSame(dayjs(date),'day')
+  //   )
+  // }
 
   const shouldDisableTime = (timeForDisable,view) => {
 
@@ -33,14 +42,25 @@ function BookCalendar() {
     if(timeForDisable.minute() !== 0 &&
        timeForDisable.minute() !== 30) return true;
 
-    return reservedDates.some(date => dayjs(date).isSame(timeForDisable,'minute'))
+    return reservedDates.some(date => dayjs(date.reservationDate)
+                                      .isSame(timeForDisable,'minute'))
   }
 
   const handleSaveChanges = () => {
     if(error) return;
     
     if(selectedDate) {
-        dispatch(reserveDate(selectedDate.toString()))
+        dispatch(
+          reserveDate(
+            {
+              id: crypto.randomUUID(),
+              hotelId: currentHotel.id,
+              hotelName: currentHotel.name,
+              hotelPrice: currentHotel.price,
+              reservationDate: selectedDate.toString(),
+            }
+          )
+        )
     }
     setOpen(false);
     setSelectedDate(null);
