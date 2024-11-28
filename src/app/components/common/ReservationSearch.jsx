@@ -1,6 +1,6 @@
 import { Search } from "@mui/icons-material"
 import { Divider, IconButton, InputBase, Paper } from "@mui/material"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setListFilter } from "../../../features/slices/hotelSlice";
 
@@ -18,6 +18,17 @@ function ReservationSearch({ filter }) {
     e.preventDefault();
     dispatch(setListFilter(searchFilter))
   }
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      dispatch(setListFilter(searchFilter));
+    }, 1000)
+       
+    return () => {
+      clearTimeout(timeout) 
+    }
+
+  },[searchFilter])
 
   return (
     <>
