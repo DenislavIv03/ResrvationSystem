@@ -5,15 +5,14 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { reserveDate, selectCalendarDates } from "../../features/slices/bookCalendarSlice"
 import dayjs from "dayjs"
-import { selectHotels } from "../../features/slices/hotelSlice"
+import { getSingleHotel, selectHotels } from "../../features/slices/hotelSlice"
 
 function BookCalendar({for: serviceId}) {
   
   const dispatch = useDispatch();
 
-  const currentHotel = useSelector(selectHotels)
-                       .find(hotel => hotel.id == serviceId)
-
+  const currentHotel = useSelector((state) => getSingleHotel(state, serviceId))
+                      
   const reservedDates = useSelector(selectCalendarDates)
                         .filter(resDate => resDate.hotelId == currentHotel.id)
 

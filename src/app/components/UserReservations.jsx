@@ -1,4 +1,4 @@
-import { DataGrid } from "@mui/x-data-grid"
+import { DataGrid, GridToolbar } from "@mui/x-data-grid"
 import { useSelector } from "react-redux"
 import { selectCalendarDates } from "../../features/slices/bookCalendarSlice"
 import DummyHotelSearch from "./DummyHotelSearch"
@@ -22,6 +22,12 @@ function UserReservations() {
         <DataGrid
             rows={rows}
             columns={columns}
+            slots={{toolbar: GridToolbar}}
+            slotProps={{
+              toolbar: {
+                showQuickFilter: true,
+              }
+            }}
             sx={{
                 width: 1000,
                 maxWidth: "calc(100% - 2rem)",

@@ -1,16 +1,22 @@
 import { Search } from "@mui/icons-material"
 import { Divider, IconButton, InputBase, Paper } from "@mui/material"
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setListFilter } from "../../../features/slices/hotelSlice";
 
-function ReservationSearch() {
-  const [searchValue, setSearchValue] = useState("");
+function ReservationSearch({ filter }) {
+
+  const dispatch = useDispatch();
+
+  const [searchFilter, setSearchFilter] = useState("")
 
   const handleChange = (e) => {
-    setSearchValue(e.target.value)
+    setSearchFilter(e.target.value)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(setListFilter(searchFilter))
   }
 
   return (
@@ -29,7 +35,7 @@ function ReservationSearch() {
         <InputBase 
           placeholder="Search reservation"
           inputProps={{"aria-label": "search reservation"}}
-          value={searchValue}
+          value={searchFilter}
           onChange={handleChange}
           sx={{
             flexGrow: 1,
