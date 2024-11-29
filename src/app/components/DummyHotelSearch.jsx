@@ -6,14 +6,18 @@ import { useState } from "react"
 
 function DummyHotelSearch() {
   const [filter,setFilter] = useState(null)
-  const hotels = useSelector(selectHotels)
+  const [isLoading,setIsLoading] = useState(false)
  
   const getFilteredHotels = useSelector(getVisibleHotels);
 
   return (
     <>
-        <ReservationSearch filter={(searchFilter) => setFilter(searchFilter)}/>
-        {getFilteredHotels.map(hotel => {
+        <ReservationSearch 
+          loading={isLoading}
+          setLoading={(loading) => setIsLoading(loading)}
+        />
+
+        {!isLoading && getFilteredHotels.map(hotel => {
             return (
                 <div key={hotel.id}>
                     <h3>{hotel.name}</h3>

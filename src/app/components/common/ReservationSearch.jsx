@@ -3,13 +3,14 @@ import { Divider, IconButton, InputBase, Paper } from "@mui/material"
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setListFilter } from "../../../features/slices/hotelSlice";
+import { TailSpin } from "react-loader-spinner"
 
-function ReservationSearch({ filter }) {
+function ReservationSearch({ loading, setLoading }) {
 
   const dispatch = useDispatch();
 
   const [searchFilter, setSearchFilter] = useState("")
-
+  
   const handleChange = (e) => {
     setSearchFilter(e.target.value)
   }
@@ -20,18 +21,25 @@ function ReservationSearch({ filter }) {
   }
 
   useEffect(() => {
+    
     const timeout = setTimeout(() => {
       dispatch(setListFilter(searchFilter));
+      setLoading(false)
     }, 1000)
-       
+
+    if(searchFilter) {
+      setLoading(true);
+    }
+    
     return () => {
-      clearTimeout(timeout) 
+      clearTimeout(timeout)
     }
 
   },[searchFilter])
 
   return (
     <>
+      
       <Paper
         component="form"
         onSubmit={handleSubmit}
@@ -59,6 +67,8 @@ function ReservationSearch({ filter }) {
         </IconButton>
 
       </Paper>
+
+      <TailSpin visible={loading} width={50} height={50} color="gray" ariaLabel="search loading" />
     </>
   )
 }
