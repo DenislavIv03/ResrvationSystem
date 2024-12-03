@@ -11,6 +11,9 @@ import { messageSuccess } from './app/components/Toast.js'
 import { ToastContainer } from 'react-toastify'
 import ReservationList from './app/components/ReservationList'
 import { styled } from '@mui/system';
+import MyProfile from './app/pages/ProfilePage'
+import SignUp from './app/pages/Register'
+import BookCalendar from './app/components/BookCalendar'
 
 const BigReservationTitle = styled('h3')({
   fontSize: 20,
@@ -62,6 +65,14 @@ function App() {
             <Box sx={{  marginRight: "10px"}}>Reservation System</Box>
             <div>I am logged in!</div>
             <button onClick={() => dispatch(logout())}>Logout</button>
+            <BookCalendar />
+            
+            <Routes>
+            <Route path="profile" element={<MyProfile/>} />
+            </Routes>
+            <Routes>
+            <Route path="register" element={<SignUp/>} />
+            </Routes>
           </ProtectedRoute>
         }/>
         <Route path='/sign-in' element={<SignIn />}/>
