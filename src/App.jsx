@@ -6,7 +6,6 @@ import ProtectedRoute from './app/components/common/ProtectedRoute'
 import { logout } from './features/slices/authSlice'
 import { useDispatch } from 'react-redux'
 import "react-toastify/dist/ReactToastify.css";
-import React from 'react';
 import { messageSuccess } from './app/components/Toast.js'
 import { ToastContainer } from 'react-toastify'
 import ReservationList from './app/components/ReservationList'
@@ -55,7 +54,6 @@ const notify = () => messageSuccess("Success!");
 
 function App() {
   const dispatch = useDispatch()
-  const [count, setCount] = useState(0)
 
   return (
     <>
