@@ -1,6 +1,5 @@
 import Navbar from '../components/DetailsPage/Navbar'
 import DetailsBreadcrumbs from '../components/DetailsPage/DetailsBreadcrumbs'
-import '../components/DetailsPage/detailsStyle.css'
 import CustomCarousel from'../components/DetailsPage/customCarousel'
 import About from '../components/DetailsPage/About'
 import Booking from '../components/DetailsPage/Booking'
