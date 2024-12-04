@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { reserveDate, selectCalendarDates } from "../../features/slices/bookCalendarSlice"
 import dayjs from "dayjs"
 import { getSingleHotel, selectHotels } from "../../features/slices/hotelSlice"
+import { messageError, messageSuccess } from "./Toast"
 
 function BookCalendar({for: serviceId}) {
   
@@ -46,7 +47,10 @@ function BookCalendar({for: serviceId}) {
   }
 
   const handleSaveChanges = () => {
-    if(error) return;
+    if(error) {
+      messageError("This date and time are invalid or are already reserved!")
+      return;
+    } ;
     
     if(selectedDate) {
         dispatch(
@@ -54,12 +58,13 @@ function BookCalendar({for: serviceId}) {
             {
               id: crypto.randomUUID(),
               hotelId: currentHotel.id,
-              hotelName: currentHotel.name,
+              hotelName: currentHotel.title,
               hotelPrice: currentHotel.price,
               reservationDate: selectedDate.toString(),
             }
           )
         )
+        messageSuccess("Reservation created successfully!")
     }
     setOpen(false);
     setSelectedDate(null);

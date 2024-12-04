@@ -3,6 +3,7 @@ import { getVisibleHotels, selectHotels } from "../../features/slices/hotelSlice
 import BookCalendar from "./BookCalendar"
 import ReservationSearch from "./common/ReservationSearch"
 import { useState } from "react"
+import ReservationCard from "./ReservationCard"
 
 function DummyHotelSearch() {
   const [filter,setFilter] = useState(null)
@@ -20,8 +21,11 @@ function DummyHotelSearch() {
         {!isLoading && getFilteredHotels.map(hotel => {
             return (
                 <div key={hotel.id}>
-                    <h3>{hotel.name}</h3>
-                    <p>{hotel.price}$</p>
+                    <ReservationCard
+                      thumbnail={hotel.thumbnail}
+                      title={hotel.title}
+                      price={hotel.price}
+                    />
                     <BookCalendar for={hotel.id}/>
                 </div>
             )
