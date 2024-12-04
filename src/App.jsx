@@ -13,6 +13,9 @@ import { styled } from '@mui/system';
 import MyProfile from './app/pages/ProfilePage'
 import SignUp from './app/pages/Register'
 import BookCalendar from './app/components/BookCalendar'
+import ReservationSearch from './app/components/common/ReservationSearch'
+import DummyHotelSearch from './app/components/DummyHotelSearch'
+import UserReservations from './app/components/UserReservations'
 
 const BigReservationTitle = styled('h3')({
   fontSize: 20,
@@ -58,25 +61,22 @@ function App() {
   return (
     <>
       <Routes>
-      <Route path='/sign-in' element={<SignIn />}/>
+        <Route path='/sign-in' element={<SignIn />}/>
         <Route path="/*" element={
           <ProtectedRoute>
-            <Routes>        
-            <Route path='/room-details' element={<Details />}/>
-            </Routes>
             <Box sx={{  marginRight: "10px"}}>Reservation System</Box>
             <div>I am logged in!</div>
             <button onClick={() => dispatch(logout())}>Logout</button>
-            <BookCalendar />
             
             <Routes>
-            <Route path="profile" element={<MyProfile/>} />
-            </Routes>
-            <Routes>
-            <Route path="register" element={<SignUp/>} />
+              <Route index element={<h1>Home</h1>}/>
+              <Route path="profile" element={<MyProfile/>} /> 
+              <Route path="my-reservations" element={<UserReservations />}/>
+              <Route path='room-details' element={<Details />}/>
             </Routes>
           </ProtectedRoute>   
         }/>
+
       </Routes>
       <div>
       <button onClick={notify}>Notify!</button>
